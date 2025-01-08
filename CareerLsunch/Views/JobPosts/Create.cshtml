@@ -1,0 +1,89 @@
+﻿@model CareerLaunch.Models.JobPost
+
+@{
+    ViewData["Title"] = "Post Job";
+}
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('@Url.Content("~/images/hero_1.jpg")');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Post A Job</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                    <a href="#">Job</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Post a Job</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    <div class="container">
+        <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="JobPosts">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <h3 class="text-black mb-5 border-bottom pb-2">Job Details</h3>
+
+            <div class="form-group">
+                <label for="File" class="d-block">Upload Featured Image</label>
+                <label class="btn btn-primary btn-md btn-file">
+                    Browse File
+                    <input type="file" id="File" name="File" hidden onchange="showFileName(this)">
+                </label>
+                <span id="file-name" class="ml-2 text-muted"></span>
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" id="Email" name="Email" placeholder="you@yourdomain.com" value="@Model.Email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Title">Job Title</label>
+                <input type="text" class="form-control" id="Title" name="Title" placeholder="Product Designer" value="@Model.Title">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Location">Location</label>
+                <input type="text" class="form-control" id="Location" name="Location" placeholder="e.g. New York" value="@Model.Location">
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="JobType">Job Type</label>
+                <select class="selectpicker border rounded" id="JobType" name="JobType" data-style="btn-black" data-width="100%" data-live-search="true" title="Select Job Type">
+                    <option value="FullTime">Full Time</option>
+                    <option value="PartTime">Part Time</option>
+                </select>
+                <span asp-validation-for="JobType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Description">Job Description</label>
+                <textarea class="form-control" id="Description" name="Description" rows="5">@Model.Description</textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <h3 class="text-black my-5 border-bottom pb-2">Company Details</h3>
+
+            <div class="form-group">
+                <label for="CompanyName">Company Name</label>
+                <input type="text" class="form-control" id="CompanyName" name="CompanyName" placeholder="e.g. Innovative Solutions" value="@Model.CompanyName">
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-block btn-primary btn-md">Save Job</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    function showFileName(input) {
+        const fileName = input.files[0]?.name || "No file chosen";
+        document.getElementById('file-name').innerText = fileName;
+    }
+</script>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CareerLaunch.Models.BlogPost>
+
+
+@{
+    ViewData["Title"] = "Blogs";
+}
+  
+
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('@Url.Content("~/images/hero_1.jpg")');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Our Blog</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="@Url.Action("Index", "Home")">Home</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Blogs</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    <div class="container">
+        <div class="row mb-5">
+            @foreach (var post in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-5">
+                   
+                    <a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@post.BlogPostId">
+                        <img src="@Url.Content(post.ImageUrl)" alt="Image" class="img-fluid rounded mb-4">
+                    </a>
+                    <h3><a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@post.BlogPostId" class="text-black">@post.Title</a></h3>
+                    <div>@post.PublishedDate.ToString("MMMM dd, yyyy") <span class="mx-2">|</span> <a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@post.BlogPostId">@post.Author Author</a></div>
+                </div>
+            }
+        </div>
+
+        <div class="text-center mt-5">
+            <a asp-action="Create" asp-controller="BlogPosts" class="btn btn-lg btn-success rounded-pill shadow-lg" style="padding: 12px 30px; font-size: 1.2rem;">
+                Create Blog
+            </a>
+        </div>
+
+        <div class="custom-pagination ml-auto">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <a asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)" class="prev">Prev</a>
+            }
+
+            @for (var i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                if (i == ViewBag.CurrentPage)
+                {
+                    <a href="#" class="active">@i</a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-route-page="@i">@i</a>
+                }
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <a asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)" class="next">Next</a>
+            }
+        </div>
+
+
+    </div>
+</section>

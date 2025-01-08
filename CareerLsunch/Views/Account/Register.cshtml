@@ -1,0 +1,101 @@
+﻿@model CareerLaunch.Models.ViewModel.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('@Url.Content("~/images/hero_1.jpg")');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Sign Up</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="@Url.Action("Index", "Home")">Home</a>
+                    <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Sign Up</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Sign Up Form -->
+            <div class="col-lg-6 mb-5">
+                <h2 class="mb-4">Sign Up To Career Launch</h2>
+                <form asp-action="Register" asp-controller="Account" method="post" class="p-4 border rounded">
+
+                    <div class="row form-group">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <label class="text-black" for="registerFirstName">First Name</label>
+                            <input asp-for="FirstName" class="form-control" id="registerFirstName" placeholder="First Name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <label class="text-black" for="registerLastName">Last Name</label>
+                            <input asp-for="LastName" class="form-control" id="registerLastName" placeholder="Last Name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <label class="text-black" for="registerEmail">Email</label>
+                            <input asp-for="Email" class="form-control" id="registerEmail" placeholder="Email address" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <label class="text-black" for="registerPassword">Password</label>
+                            <input asp-for="Password" type="password" class="form-control" id="registerPassword" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Confirm Password Field -->
+                    <div class="row form-group mb-4">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <label class="text-black" for="registerConfirmPassword">Re-Type Password</label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" id="registerConfirmPassword" placeholder="Re-type Password" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Role Selection -->
+                    <div class="row form-group mb-4">
+                        <div class="col-md-12 mb-3 mb-md-0">
+                            <label class="text-black" for="role">Select Your Role</label>
+                            <select asp-for="Role" class="form-control" id="role">
+                                <option value="Employer">Employer</option>
+                                <option value="JobSeeker">Job Seeker</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Sign Up" class="btn px-4 btn-primary text-white">
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Link to Log In page -->
+                <div class="mt-3 text-center">
+                    <p>Already have an account? <a href="@Url.Action("Login", "Account")">Log In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

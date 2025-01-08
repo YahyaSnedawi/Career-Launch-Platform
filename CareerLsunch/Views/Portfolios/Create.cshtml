@@ -1,0 +1,136 @@
+﻿@model CareerLaunch.Models.Portfolio
+
+@{
+    ViewData["Title"] = "Create Portfolio";
+}
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('@Url.Content("~/images/hero_1.jpg")');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Create Portfolio</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                    <a href="#">Portfolio</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Create Portfolio</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    <div class="container">
+        <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Portfolios">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <h3 class="text-black mb-5 border-bottom pb-2">Personal Information</h3>
+
+            <div class="form-group">
+                <label for="ProfilePictureFile" class="d-block">Upload Profile Picture</label>
+                <label class="btn btn-primary btn-md btn-file">
+                    Browse File
+                    <input type="file" id="ProfilePictureFile" name="ProfilePictureFile" hidden onchange="showFileName(this, 'profile-file-name')">
+                </label>
+                <span id="profile-file-name" class="ml-2 text-muted"></span>
+                <span asp-validation-for="ProfilePictureFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="ResumeFile" class="d-block">Upload Resume</label>
+                <label class="btn btn-primary btn-md btn-file">
+                    Browse File
+                    <input type="file" id="ResumeFile" name="ResumeFile" hidden onchange="showFileName(this, 'resume-file-name')">
+                </label>
+                <span id="resume-file-name" class="ml-2 text-muted"></span>
+                <span asp-validation-for="ResumeFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="FullName">Full Name</label>
+                <input type="text" class="form-control" id="FullName" name="FullName" placeholder="e.g., John Doe" value="@Model.FullName">
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="JobTitle">Job Title</label>
+                <input type="text" class="form-control" id="JobTitle" name="JobTitle" placeholder="e.g., Software Engineer" value="@Model.JobTitle">
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Biography">Biography</label>
+                <textarea class="form-control" id="Biography" name="Biography" rows="5">@Model.Biography</textarea>
+                <span asp-validation-for="Biography" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Skills">Skills</label>
+                <ul id="skillsList" class="list-unstyled">
+                    <li class="d-flex mb-2">
+                        <input type="text" class="form-control mr-2" name="Skills[]" placeholder="e.g., C#, ASP.NET, SQL">
+                        <button type="button" class="btn btn-danger remove-skill" style="display:none;">Remove</button>
+                    </li>
+                </ul>
+                <button type="button" class="btn btn-primary" id="addSkillBtn">Add Skill</button>
+                <span class="text-muted">Add skills one by one. Click "Add Skill" to add another.</span>
+            </div>
+
+            <h3 class="text-black my-5 border-bottom pb-2">Contact Information</h3>
+
+            <div class="form-group">
+                <label for="ContactEmail">Contact Email</label>
+                <input type="email" class="form-control" id="ContactEmail" name="ContactEmail" placeholder="you@domain.com" value="@Model.ContactEmail">
+                <span asp-validation-for="ContactEmail" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="ContactPhone">Contact Phone</label>
+                <input type="text" class="form-control" id="ContactPhone" name="ContactPhone" placeholder="e.g., +123456789" value="@Model.ContactPhone">
+                <span asp-validation-for="ContactPhone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="WorkType">Work Type</label>
+                <select class="form-control" id="WorkType" name="WorkType">
+                    <option value="Freelancer">Freelancer</option>
+                    <option value="Worker">Worker</option>
+                </select>
+                <span asp-validation-for="WorkType" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-block btn-primary btn-md">Create Portfolio</button>
+        </form>
+    </div>
+</section>
+
+<script>
+    function showFileName(input, elementId) {
+        const fileName = input.files[0]?.name || "No file chosen";
+        document.getElementById(elementId).innerText = fileName;
+    }
+</script>
+<script>
+    // Add a new skill input field
+    document.getElementById('addSkillBtn').addEventListener('click', function () {
+        var skillList = document.getElementById('skillsList');
+        var newSkill = document.createElement('li');
+        newSkill.classList.add('d-flex', 'mb-2');
+
+        newSkill.innerHTML = `
+                <input type="text" class="form-control mr-2" name="Skills[]" placeholder="e.g., C#, ASP.NET, SQL">
+                <button type="button" class="btn btn-danger remove-skill">Remove</button>
+            `;
+
+        skillList.appendChild(newSkill);
+
+        // Show the "Remove" button for new skills
+        newSkill.querySelector('.remove-skill').style.display = 'inline';
+    });
+
+    // Remove a skill input field
+    document.getElementById('skillsList').addEventListener('click', function (event) {
+        if (event.target && event.target.classList.contains('remove-skill')) {
+            event.target.parentElement.remove();
+        }
+    });
+</script>

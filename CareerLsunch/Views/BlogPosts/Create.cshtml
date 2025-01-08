@@ -1,0 +1,107 @@
+﻿@model CareerLaunch.Models.BlogPost
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<h4>BlogPost</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Create" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <!-- Title Field -->
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <!-- Content Field -->
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+
+            <!-- Featured Image Field -->
+            <div class="form-group">
+                <label for="File" class="d-block">Upload Featured Image</label>
+                <label class="btn btn-primary btn-md btn-file">
+                    Blog Image
+                    <input type="file" id="File" name="File" hidden onchange="showFileName(this)">
+                </label>
+                <span id="file-name" class="ml-2 text-muted"></span>
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+
+            <!-- Published Date Field -->
+            <div class="form-group">
+                <label asp-for="PublishedDate" class="control-label"></label>
+                <input asp-for="PublishedDate" class="form-control" type="datetime-local" />
+                <span asp-validation-for="PublishedDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Author" class="control-label">Author Name</label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="AuthorImage" class="d-block">Upload Author Image</label>
+                <label class="btn btn-primary btn-md btn-file" for="AuthorImage">
+                    Select Author Image
+                </label>
+                <input type="file" id="AuthorImage" name="AuthorImage" hidden onchange="showAuthorImageName(this)">
+                <span id="author-image-name" class="ml-2 text-muted">No file chosen</span>
+                <span asp-validation-for="AuthorImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorBio" class="control-label">Author Bio</label>
+                <textarea asp-for="AuthorBio" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="AuthorBio" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="SectionTitle" class="control-label">Section Title</label>
+                <input asp-for="SectionTitle" class="form-control" />
+                <span asp-validation-for="SectionTitle" class="text-danger"></span>
+            </div>
+
+          
+            <div class="form-group">
+                <label asp-for="SectionContent" class="control-label">Section Content</label>
+                <textarea asp-for="SectionContent" class="form-control" rows="6"></textarea>
+                <span asp-validation-for="SectionContent" class="text-danger"></span>
+            </div>
+
+           
+            
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script>
+    function showFileName(input) {
+        const fileName = input.files[0]?.name || "No file chosen";
+        document.getElementById('file-name').innerText = fileName;
+    }
+</script>
+<script>
+    function showAuthorImageName(input) {
+        const fileName = input.files[0]?.name || "No file chosen";
+        document.getElementById('author-image-name').innerText = fileName;
+    }
+</script>

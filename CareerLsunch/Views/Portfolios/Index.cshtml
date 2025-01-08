@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Portfolio>
+
+@{
+    ViewData["Title"] = "Portfolios";
+}
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('@Url.Content("~/images/hero_1.jpg")');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Portfolios</h1>
+                <div class="custom-breadcrumbs">
+                    <a asp-action="Index" asp-controller="Home">Home</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Portfolio</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section block__62272" id="next-section">
+    <div class="container">
+        <div id="posts" class="row no-gutter">
+            @foreach (var portfolio in Model)
+            {
+                <div class="item @portfolio.WorkType.ToLower() col-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 mb-4">
+                    <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="item-wrap">
+                        <span class="icon-add"></span>
+                        <img src="@portfolio.ProfilePicture" alt="@portfolio.FullName" class="img-fluid rounded">
+                    </a>
+                    <div class="portfolio-info p-3 bg-light rounded">
+                       
+                        <h4>
+                            <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-link text-dark font-weight-bold" style="font-size: 1.1rem;">
+                                @portfolio.FullName
+                            </a>
+                        </h4>
+
+                        
+                        <p>
+                            <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-link" style="color: green; font-size: 1rem;">
+                                @portfolio.WorkType
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+   
+    <div class="text-center mt-5">
+        <a asp-action="Create" asp-controller="Portfolios"  class="btn btn-lg btn-success rounded-pill shadow-lg" style="padding: 12px 30px; font-size: 1.2rem;">
+            Create Your Portfolio
+        </a>
+    </div>
+
+    <div class="custom-pagination ml-auto mt-4">
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)" class="prev">Prev</a>
+        }
+
+        @for (var i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            if (i == ViewBag.CurrentPage)
+            {
+                <a href="#" class="active">@i</a>
+            }
+            else
+            {
+                <a asp-action="Index" asp-route-page="@i">@i</a>
+            }
+        }
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)" class="next">Next</a>
+        }
+    </div>
+</section>
