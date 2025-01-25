@@ -1,0 +1,294 @@
+﻿@model IEnumerable<CareerLaunch.Models.BlogPost>
+
+@{
+    ViewData["Title"] = "Blog Requests";
+}
+
+<style>
+    body {
+        background: linear-gradient(to right, #f8f9fa, #e9ecef);
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    .page-header {
+        background-color: #343a40;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .btn {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        display: inline-block;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    .table-responsive {
+        margin-top: 20px;
+    }
+
+    h3.fw-bold {
+        font-size: 24px;
+    }
+
+    .card-header {
+        background-color: #f8f9fa;
+        padding: 10px 15px;
+        border-radius: 5px;
+    }
+
+    .breadcrumbs {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+    }
+
+        .breadcrumbs li {
+            display: inline;
+            margin-right: 5px;
+        }
+
+            .breadcrumbs li a {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+                .breadcrumbs li a:hover {
+                    text-decoration: underline;
+                }
+
+</style>
+
+<div class="container">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Blogs Table</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header ">
+                        <div class="d-flex align-items-center bg-secondary">
+                            <h4 class="card-title">All Blogs</h4>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="add-row" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Author Name</th>
+                                        <th>Email</th>
+                                        <th>Title</th>
+                                        <th>Created Date</th>
+                                        <th style="width: 10%">Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.PendingBlogs != null)
+                                    {
+                                        foreach (var blogPost in ViewBag.PendingBlogs)
+                                        {
+                                            <tr>
+                                                <td>@blogPost.BlogPostId</td>
+                                                <td>@blogPost.Author</td>
+                                                <td>@blogPost.AuthorEmail</td>
+                                                <td>@blogPost.Title</td>
+                                                <td>@blogPost.PublishedDate</td>
+                                                <td>Pending</td>
+
+                                                <td>
+                                                    <a asp-action="Accept" asp-controller="BlogPosts" asp-route-id="@blogPost.BlogPostId" class="btn btn-success" onclick="return confirm('Are you sure you want to accept this Blog?');">Accept</a>
+                                                    <a asp-action="Reject" asp-controller="BlogPosts" asp-route-id="@blogPost.BlogPostId" class="btn btn-danger" onclick="return confirm('Are you sure you want to reject this Blog?');">Reject</a>
+
+                                                    <a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@blogPost.BlogPostId" class="btn btn-primary">Details</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accepted Talents Table -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-success">
+                        <h4 class="card-title">Accepted Blogs</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="multi-filter-select" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Author Name</th>
+                                        <th>Email</th>
+                                        <th>Title</th>
+                                        <th>Created Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.AcceptedBlogs != null)
+                                    {
+                                        foreach (var blogPost in ViewBag.AcceptedBlogs)
+                                        {
+                                            <tr>
+                                                <td>@blogPost.BlogPostId</td>
+                                                <td>@blogPost.Author</td>
+                                                <td>@blogPost.AuthorEmail</td>
+                                                <td>@blogPost.Title</td>
+                                                <td>@blogPost.PublishedDate</td>
+                                                <td>Accepted</td>
+                                                <td>
+                                                    <a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@blogPost.BlogPostId" class="btn btn-primary">Details</a>
+                                                    <a asp-action="Pend" asp-controller="BlogPosts" asp-route-id="@blogPost.BlogPostId" class="btn btn-secondary" onclick="return confirm('Are you sure you want to Re-Assess this Blog?');">Pend</a>
+
+                                                </td>
+
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-danger">
+                        <h4 class="card-title">Rejected Blogs</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="basic-datatables" class="display table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Author Name</th>
+                                        <th>Email</th>
+                                        <th>Title</th>
+                                        <th>Created Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.RejectedBlogs != null)
+                                    {
+                                        foreach (var blogPost in ViewBag.RejectedBlogs)
+                                        {
+                                            <tr>
+                                                <td>@blogPost.BlogPostId</td>
+                                                <td>@blogPost.Author</td>
+                                                <td>@blogPost.AuthorEmail</td>
+                                                <td>@blogPost.Title</td>
+                                                <td>@blogPost.PublishedDate</td>
+                                                <td>Rejected</td>
+                                                <td>
+                                                    <a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@blogPost.BlogPostId" class="btn btn-primary">Details</a>
+                                                    <a asp-action="Pend" asp-controller="BlogPosts" asp-route-id="@blogPost.BlogPostId" class="btn btn-secondary" onclick="return confirm('Are you sure you want to Re-Assess this Blog?');">Pend</a>
+
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

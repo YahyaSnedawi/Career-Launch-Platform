@@ -37,16 +37,22 @@ namespace CareerLaunch.Models
         [EmailAddress(ErrorMessage = "The email is not a valid email address.")]
         public string Email { get; set; }
         public string? UploadedFilePath { get; set; }
+       
+       
+        public JobPostStatus Status { get; set; }
+        public DateTime? PostDate { get; set; } = DateTime.UtcNow;
 
-
-        public DateTime PostDate { get; set; }
-
-        public ICollection<Application>? Applications { get; set; } = new List<Application>();
 
         [NotMapped]
         public IFormFile File { get; set; }
 
 
     }
-   
+    public enum JobPostStatus
+    {
+        Pending,
+        Accepted,
+        Rejected
+    }
+
 }

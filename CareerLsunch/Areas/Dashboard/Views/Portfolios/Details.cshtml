@@ -1,0 +1,53 @@
+﻿@model CareerLaunch.Models.Portfolio
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<!-- HOME -->
+
+<section class="site-section pb-0 portfolio-single" id="next-section">
+    <div class="container">
+        <div class="row mb-5 mt-5">
+            <div class="col-lg-4">
+                <div class="profile-img">
+                    <img src="@Model.ProfilePicture" alt="Profile Picture" class="img-fluid" style="width: 200px; height: 200px; object-fit: cover;">
+                </div>
+            </div>
+
+            <div class="col-lg-8 ml-auto">
+                <h2 class="mb-4">@Model.FullName</h2>
+                <h4 class="text-muted">@Model.JobTitle</h4>
+                <p class="mt-4">@Model.Biography</p>
+
+                <div class="skills mt-4">
+                    <h5>Skills</h5>
+                    <ul>
+                        @foreach (var skill in Model.Skills)
+                        {
+                            <li>@skill</li>
+                        }
+                    </ul>
+                </div>
+
+                <div class="contact-info mt-4">
+                    <h5>Contact Information</h5>
+                    <p><strong>Email:</strong> <a href="mailto:@Model.ContactEmail">@Model.ContactEmail</a></p>
+                    <p><strong>Phone:</strong> @Model.ContactPhone</p>
+                </div>
+
+                <div class="work-type mt-4">
+                    <h5>Work Type</h5>
+                    <p>@Model.WorkType</p>
+                </div>
+
+                @if (Model.ResumeUrl != null)
+                {
+                    <a href="@Model.ResumeUrl" class="btn btn-outline-primary border-width-2 mt-4">View Resume</a>
+                }
+            </div>
+        </div>
+
+      
+    </div>
+</section>

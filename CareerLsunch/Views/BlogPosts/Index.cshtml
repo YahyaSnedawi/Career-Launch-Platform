@@ -32,7 +32,7 @@
                         <img src="@Url.Content(post.ImageUrl)" alt="Image" class="img-fluid rounded mb-4">
                     </a>
                     <h3><a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@post.BlogPostId" class="text-black">@post.Title</a></h3>
-                    <div>@post.PublishedDate.ToString("MMMM dd, yyyy") <span class="mx-2">|</span> <a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@post.BlogPostId">@post.Author Author</a></div>
+                    <div>@post.PublishedDate <span class="mx-2">|</span> <a asp-action="Details" asp-controller="BlogPosts" asp-route-id="@post.BlogPostId">@post.Author Author</a></div>
                 </div>
             }
         </div>

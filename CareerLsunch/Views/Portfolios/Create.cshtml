@@ -21,7 +21,7 @@
 
 <section class="site-section">
     <div class="container">
-        <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Portfolios">
+        <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Portfolios" id="createPortfolioForm">
             <div asp-validation-summary="All" class="text-danger"></div>
             <h3 class="text-black mb-5 border-bottom pb-2">Personal Information</h3>
 
@@ -132,5 +132,10 @@
         if (event.target && event.target.classList.contains('remove-skill')) {
             event.target.parentElement.remove();
         }
+    });
+</script>
+<script>
+    document.getElementById('createPortfolioForm').addEventListener('submit', function (event) {
+        alert('Thank you for submitting your Portfolio. Please await a response from our team.');
     });
 </script>

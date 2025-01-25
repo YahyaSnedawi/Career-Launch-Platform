@@ -1,0 +1,192 @@
+﻿@model IEnumerable<CareerLaunch.Models.JobPost>
+
+@{
+    ViewData["Title"] = "Job Requests";
+}
+
+<div class="container my-5">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-4 text-primary">Jobs Table</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#" class="text-decoration-none text-secondary">
+                        <i class="icon-home"></i> Home
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+            <!-- All Jobs Table -->
+            <div class="col-md-12 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-secondary text-white d-flex align-items-center">
+                        <h4 class="card-title mb-0">All Jobs</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Company Name</th>
+                                        <th>Title</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.PendingJobs != null)
+                                    {
+                                        foreach (var jobPost in ViewBag.PendingJobs)
+                                        {
+                                            <tr>
+                                                <td>@jobPost.JobPostId</td>
+                                                <td>@jobPost.CompanyName</td>
+                                                <td>@jobPost.Title</td>
+                                                <td>@jobPost.Location</td>
+                                                <td><span class="badge bg-warning">Pending</span></td>
+                                                <td>
+                                                    <a asp-action="Accept" asp-controller="JobPosts" asp-route-id="@jobPost.JobPostId" class="btn btn-lg btn-success me-2" onclick="return confirm('Are you sure you want to accept this Job?');">
+                                                        <i class="bi bi-check-circle"></i> Accept
+                                                    </a>
+                                                    <a asp-action="Reject" asp-controller="JobPosts" asp-route-id="@jobPost.JobPostId" class="btn btn-lg btn-danger me-2" onclick="return confirm('Are you sure you want to Reject this Job?');">
+                                                        <i class="bi bi-x-circle"></i> Reject
+                                                    </a>
+                                                    <a asp-action="Details" asp-controller="JobPosts" asp-route-id="@jobPost.JobPostId" class="btn btn-lg btn-primary">
+                                                        <i class="bi bi-eye"></i> Details
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accepted Jobs Table -->
+            <div class="col-md-12 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="card-title mb-0">Accepted Jobs</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Company Name</th>
+                                        <th>Title</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.AcceptedJobs != null)
+                                    {
+                                        foreach (var jobPost in ViewBag.AcceptedJobs)
+                                        {
+                                            <tr>
+                                                <td>@jobPost.JobPostId</td>
+                                                <td>@jobPost.CompanyName</td>
+                                                <td>@jobPost.Title</td>
+                                                <td>@jobPost.Location</td>
+                                                <td><span class="badge bg-success">Accepted</span></td>
+                                                <td>
+                                                    <a asp-action="Details" asp-controller="JobPosts" asp-route-id="@jobPost.JobPostId" class="btn btn-lg btn-primary me-2" title="Details">
+                                                        <i class="bi bi-eye"></i> Details
+                                                    </a>
+                                                    <a asp-action="Pend" asp-controller="JobPosts" asp-route-id="@jobPost.JobPostId" class="btn btn-lg btn-warning me-2" title="Re-Assess">
+                                                        <i class="bi bi-arrow-repeat"></i> Re-Assess
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rejected Jobs Table -->
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-danger text-white">
+                        <h4 class="card-title mb-0">Rejected Jobs</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Company Name</th>
+                                        <th>Title</th>
+                                        <th>Location</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.RejectedJobs != null)
+                                    {
+                                        foreach (var jobPost in ViewBag.RejectedJobs)
+                                        {
+                                            <tr>
+                                                <td>@jobPost.JobPostId</td>
+                                                <td>@jobPost.CompanyName</td>
+                                                <td>@jobPost.Title</td>
+                                                <td>@jobPost.Location</td>
+                                                <td><span class="badge bg-danger">Rejected</span></td>
+                                                <td>
+                                                    <a asp-action="Details" asp-controller="JobPosts" asp-route-id="@jobPost.JobPostId" class="btn btn-lg btn-primary me-2" title="Details">
+                                                        <i class="bi bi-eye"></i> Details
+                                                    </a>
+                                                    <a asp-action="Pend" asp-controller="JobPosts" asp-route-id="@jobPost.JobPostId" class="btn btn-lg btn-warning" title="Re-Assess">
+                                                        <i class="bi bi-arrow-repeat"></i> Re-Assess
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa; 
+    }
+
+    
+    .btn {
+        font-size: 1rem; 
+        padding: 0.5rem 1rem; 
+    }
+
+    .btn-success, .btn-danger, .btn-primary, .btn-secondary {
+        font-size: 1rem; 
+        padding: 0.5rem 1rem;
+    }
+
+
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>

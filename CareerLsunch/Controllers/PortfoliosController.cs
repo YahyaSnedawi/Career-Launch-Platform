@@ -18,16 +18,25 @@ namespace CareerLaunch.Controllers
         }
 
         // GET: Portfolios
-        public IActionResult Index(int page = 1, int pageSize = 9)
+        public IActionResult Index(int page = 1, int pageSize = 6)
         {
+
+            var totalPosts = _context.Portfolios
+                .Where(o => o.Status == PortfolioStatus.Accepted)
+                .Count();
+
+
+            var totalPages = (int)Math.Ceiling((double)totalPosts / pageSize);
+
+
             var portfolios = _context.Portfolios
+                .Where(o => o.Status == PortfolioStatus.Accepted)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
-            var totalPosts = _context.Portfolios.Count();
             ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = (int)Math.Ceiling((double)totalPosts / pageSize);
+            ViewBag.TotalPages = totalPages;
 
             return View(portfolios);
         }
@@ -54,6 +63,12 @@ namespace CareerLaunch.Controllers
         public IActionResult Create()
         {
             var portfolio = new Portfolio();
+            if (!User.Identity.IsAuthenticated)
+            {
+
+                TempData["LoginRequired"] = "You need to log in to join us.";
+                return RedirectToAction("Login", "Account");
+            }
             return View(portfolio);
         }
 

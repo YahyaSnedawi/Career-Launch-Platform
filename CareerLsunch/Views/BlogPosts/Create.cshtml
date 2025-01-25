@@ -4,94 +4,109 @@
     ViewData["Title"] = "Create";
 }
 
-
-
-<h4>BlogPost</h4>
-<hr />
-<div class="row">
-    <div class="col-md-8">
-        <form asp-action="Create" enctype="multipart/form-data" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-
-            <!-- Title Field -->
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('@Url.Content("~/images/hero_1.jpg")');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Create Blog</h1>
+                <div class="custom-breadcrumbs">
+                    <a asp-action="Index" asp-controller="Home">Home</a> <span class="mx-2 slash">/</span>
+                    <a asp-action="Index" asp-controller="BlogPosts">Blogs</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Create Blog</strong></span>
+                </div>
             </div>
-
-            <!-- Content Field -->
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <textarea asp-for="Content" class="form-control" rows="6"></textarea>
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-
-            <!-- Featured Image Field -->
-            <div class="form-group">
-                <label for="File" class="d-block">Upload Featured Image</label>
-                <label class="btn btn-primary btn-md btn-file">
-                    Blog Image
-                    <input type="file" id="File" name="File" hidden onchange="showFileName(this)">
-                </label>
-                <span id="file-name" class="ml-2 text-muted"></span>
-                <span asp-validation-for="File" class="text-danger"></span>
-            </div>
-
-            <!-- Published Date Field -->
-            <div class="form-group">
-                <label asp-for="PublishedDate" class="control-label"></label>
-                <input asp-for="PublishedDate" class="form-control" type="datetime-local" />
-                <span asp-validation-for="PublishedDate" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Author" class="control-label">Author Name</label>
-                <input asp-for="Author" class="form-control" />
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label for="AuthorImage" class="d-block">Upload Author Image</label>
-                <label class="btn btn-primary btn-md btn-file" for="AuthorImage">
-                    Select Author Image
-                </label>
-                <input type="file" id="AuthorImage" name="AuthorImage" hidden onchange="showAuthorImageName(this)">
-                <span id="author-image-name" class="ml-2 text-muted">No file chosen</span>
-                <span asp-validation-for="AuthorImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AuthorBio" class="control-label">Author Bio</label>
-                <textarea asp-for="AuthorBio" class="form-control" rows="6"></textarea>
-                <span asp-validation-for="AuthorBio" class="text-danger"></span>
-            </div>
-          
-            <div class="form-group">
-                <label asp-for="SectionTitle" class="control-label">Section Title</label>
-                <input asp-for="SectionTitle" class="form-control" />
-                <span asp-validation-for="SectionTitle" class="text-danger"></span>
-            </div>
-
-          
-            <div class="form-group">
-                <label asp-for="SectionContent" class="control-label">Section Content</label>
-                <textarea asp-for="SectionContent" class="form-control" rows="6"></textarea>
-                <span asp-validation-for="SectionContent" class="text-danger"></span>
-            </div>
-
-           
-            
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+
+<section class="site-section">
+    <div class="container" style="max-width: 100%; padding: 0;">
+        <div class="col-md-8" style="margin: 0 auto; width: 100%; padding: 20px;">
+            <form class="p-4 p-md-5 border rounded" asp-action="Create" enctype="multipart/form-data" method="post" id="createBlogForm" style="background-color: #f9f9f9; border: 1px solid #ddd; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h2 style="text-align: center; margin-bottom: 20px;">Create Blog Post</h2>
+
+                <!-- Validation Summary -->
+                <div asp-validation-summary="All" class="text-danger" style="margin-bottom: 15px;"></div>
+
+                <!-- Title Field -->
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="Title" class="control-label" style="font-weight: bold;">Title</label>
+                    <input asp-for="Title" class="form-control" style="padding: 10px; border: 1px solid #ccc; width: 100%;" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <!-- Content Field -->
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="Content" class="control-label" style="font-weight: bold;">Content</label>
+                    <textarea asp-for="Content" class="form-control" rows="6" style="padding: 10px; border: 1px solid #ccc; width: 100%;"></textarea>
+                    <span asp-validation-for="Content" class="text-danger"></span>
+                </div>
+
+                <!-- Featured Image Field -->
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="File" class="d-block" style="font-weight: bold;">Upload Featured Image</label>
+                    <label class="btn btn-primary btn-md btn-file" style="cursor: pointer;">
+                        Blog Image
+                        <input type="file" id="File" name="File" hidden onchange="showFileName(this)">
+                    </label>
+                    <span id="file-name" class="ml-2 text-muted"></span>
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+
+                <!-- Author Fields -->
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="Author" class="control-label" style="font-weight: bold;">Author Name</label>
+                    <input asp-for="Author" class="form-control" style="padding: 10px; border: 1px solid #ccc; width: 100%;" />
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="AuthorEmail" class="control-label" style="font-weight: bold;">Author Email</label>
+                    <input asp-for="AuthorEmail" class="form-control" style="padding: 10px; border: 1px solid #ccc; width: 100%;" />
+                    <span asp-validation-for="AuthorEmail" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="AuthorImage" class="d-block" style="font-weight: bold;">Upload Author Image</label>
+                    <label class="btn btn-primary btn-md btn-file" style="cursor: pointer;">
+                        Select Author Image
+                        <input type="file" id="AuthorImage" name="AuthorImage" hidden onchange="showAuthorImageName(this)">
+                    </label>
+                    <span id="author-image-name" class="ml-2 text-muted">No file chosen</span>
+                    <span asp-validation-for="AuthorImageUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="AuthorBio" class="control-label" style="font-weight: bold;">Author Bio</label>
+                    <textarea asp-for="AuthorBio" class="form-control" rows="6" style="padding: 10px; border: 1px solid #ccc; width: 100%;"></textarea>
+                    <span asp-validation-for="AuthorBio" class="text-danger"></span>
+                </div>
+
+                <!-- Section Fields -->
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="SectionTitle" class="control-label" style="font-weight: bold;">Section Title</label>
+                    <input asp-for="SectionTitle" class="form-control" style="padding: 10px; border: 1px solid #ccc; width: 100%;" />
+                    <span asp-validation-for="SectionTitle" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="SectionContent" class="control-label" style="font-weight: bold;">Section Content</label>
+                    <textarea asp-for="SectionContent" class="form-control" rows="6" style="padding: 10px; border: 1px solid #ccc; width: 100%;"></textarea>
+                    <span asp-validation-for="SectionContent" class="text-danger"></span>
+                </div>
+
+                <!-- Submit and Back Buttons -->
+                <div class="form-group" style="margin-top: 20px; text-align: center;">
+                    <input type="submit" value="Create" class="btn btn-primary" style="padding: 10px 20px; font-size: 16px;" />
+                </div>
+                <div style="text-align: center;">
+                    <a asp-action="Index" style="color: #007bff; text-decoration: underline;">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
 <script>
     function showFileName(input) {
@@ -104,4 +119,9 @@
         const fileName = input.files[0]?.name || "No file chosen";
         document.getElementById('author-image-name').innerText = fileName;
     }
+</script>
+<script>
+    document.getElementById('createBlogForm').addEventListener('submit', function (event) {
+        alert('Thank you for submitting your Blog. Please await a response from our team.');
+    });
 </script>

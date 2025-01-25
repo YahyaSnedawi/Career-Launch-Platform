@@ -1,0 +1,84 @@
+﻿@model CareerLaunch.Models.Contact
+@{
+    ViewData["Title"] = "Contact Details";
+}
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #0056b3;
+    }
+
+    .card-content {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .card-content .field-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .btn-back {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #0056b3;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .btn-back:hover {
+        background-color: #004495;
+    }
+</style>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">Contact Details</div>
+
+    <!-- Card -->
+    <div class="card">
+        <h2 class="card-title">Details of @Model.FirstName @Model.LastName</h2>
+        <div class="card-content">
+            <p><span class="field-label">Subject:</span> @Model.Subject</p>
+            <p><span class="field-label">Email:</span> @Model.Email</p>
+            <p><span class="field-label">Phone:</span> PhoneNumber</p>
+            <p><span class="field-label">Message:</span> @Model.Message</p>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="@Url.Action("Index", "Contacts")" class="btn-back">Back to Contacts</a>
+</div>

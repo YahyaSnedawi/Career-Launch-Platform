@@ -8,8 +8,9 @@ namespace CareerLaunch.Data
         public static async Task Initialize(IServiceProvider serviceProvider, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             
-            var roleNames = new[] { "Employer", "JobSeeker" };
+            var roleNames = new[] { "Admin", "Employer", "JobSeeker" };
 
+           
             foreach (var roleName in roleNames)
             {
                 var roleExist = await roleManager.RoleExistsAsync(roleName);
@@ -19,37 +20,63 @@ namespace CareerLaunch.Data
                 }
             }
 
-            var user = await userManager.FindByEmailAsync("admin@domain.com");
-            if (user == null)
+            
+            var adminEmail = "yahya@careerlaunch.com"; 
+            var adminPassword = "1234@Admin.Yahya";  
+            var adminUser = await userManager.FindByEmailAsync(adminEmail);
+            if (adminUser == null)
             {
-                user = new ApplicationUser
+                adminUser = new ApplicationUser
                 {
-                    UserName = "admin@domain.com",
-                    Email = "admin@domain.com",
-                    FirstName = "Admin",
-                    LastName = "User"
+                    UserName = adminEmail,
+                    Email = adminEmail,
+                    FirstName = "Yahya",
+                    LastName = "Admin",
                 };
 
-                await userManager.CreateAsync(user, "Password@123");
+                await userManager.CreateAsync(adminUser, adminPassword);
 
-                await userManager.AddToRoleAsync(user, "Employer");
+               
+                await userManager.AddToRoleAsync(adminUser, "Admin");
             }
 
-            var jobSeekerUser = await userManager.FindByEmailAsync("seeker@domain.com");
+            var employerEmail = "employer@careerlaunch.com";  
+            var employerPassword = "1234@Employer.Yahya"; 
+            var employerUser = await userManager.FindByEmailAsync(employerEmail);
+            if (employerUser == null)
+            {
+                employerUser = new ApplicationUser
+                {
+                    UserName = employerEmail,
+                    Email = employerEmail,
+                    FirstName = "Employer",
+                    LastName = "User",
+                };
+
+                await userManager.CreateAsync(employerUser, employerPassword);
+
+                await userManager.AddToRoleAsync(employerUser, "Employer");
+            }
+
+           
+            var jobSeekerEmail = "seeker@careerlaunch.com"; 
+            var jobSeekerPassword = "1234@JobSeeker.Yahya";  
+            var jobSeekerUser = await userManager.FindByEmailAsync(jobSeekerEmail);
             if (jobSeekerUser == null)
             {
                 jobSeekerUser = new ApplicationUser
                 {
-                    UserName = "seeker@domain.com",
-                    Email = "seeker@domain.com",
+                    UserName = jobSeekerEmail,
+                    Email = jobSeekerEmail,
                     FirstName = "Job",
-                    LastName = "Seeker"
+                    LastName = "Seeker",
                 };
 
-                await userManager.CreateAsync(jobSeekerUser, "Password@123");
+                await userManager.CreateAsync(jobSeekerUser, jobSeekerPassword);
 
                 await userManager.AddToRoleAsync(jobSeekerUser, "JobSeeker");
             }
         }
+    
     }
 }

@@ -33,45 +33,31 @@ namespace CareerLaunch.Migrations
                     b.Property<DateTime>("ApplicationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("CoverLetter")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmployerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("JobId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("JobPostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("JobSeekerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ResumePath")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("JobPostId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResumePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ApplicationId");
 
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("EmployerId");
-
-                    b.HasIndex("JobId");
-
                     b.HasIndex("JobPostId");
-
-                    b.HasIndex("JobSeekerId");
 
                     b.ToTable("Applications");
                 });
@@ -91,6 +77,10 @@ namespace CareerLaunch.Migrations
                     b.Property<string>("AuthorBio")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("AuthorEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AuthorImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -105,7 +95,7 @@ namespace CareerLaunch.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PublishedDate")
+                    b.Property<DateTime?>("PublishedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("SectionContent")
@@ -115,6 +105,9 @@ namespace CareerLaunch.Migrations
                     b.Property<string>("SectionTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.PrimitiveCollection<string>("Tags")
                         .IsRequired()
@@ -129,40 +122,37 @@ namespace CareerLaunch.Migrations
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("CareerLaunch.Models.Company", b =>
+            modelBuilder.Entity("CareerLaunch.Models.Contact", b =>
                 {
-                    b.Property<int>("CompanyId")
+                    b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactId"));
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("JobsPosted")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Location")
+                    b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LogoUrl")
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SocialMediaLinks")
+                    b.Property<string>("Subject")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CompanyId");
+                    b.HasKey("ContactId");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("CareerLaunch.Models.JobPost", b =>
@@ -199,8 +189,11 @@ namespace CareerLaunch.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<DateTime>("PostDate")
+                    b.Property<DateTime?>("PostDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -257,6 +250,9 @@ namespace CareerLaunch.Migrations
                     b.PrimitiveCollection<string>("Skills")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("WorkType")
                         .IsRequired()
@@ -482,37 +478,13 @@ namespace CareerLaunch.Migrations
 
             modelBuilder.Entity("CareerLaunch.Models.Application", b =>
                 {
-                    b.HasOne("CareerLaunch.Models.ViewModel.ApplicationUser", null)
-                        .WithMany("Applications")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("CareerLaunch.Models.ViewModel.ApplicationUser", "Employer")
-                        .WithMany()
-                        .HasForeignKey("EmployerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("CareerLaunch.Models.JobPost", "Job")
                         .WithMany()
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("JobPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CareerLaunch.Models.JobPost", null)
-                        .WithMany("Applications")
-                        .HasForeignKey("JobPostId");
-
-                    b.HasOne("CareerLaunch.Models.ViewModel.ApplicationUser", "JobSeeker")
-                        .WithMany()
-                        .HasForeignKey("JobSeekerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Employer");
 
                     b.Navigation("Job");
-
-                    b.Navigation("JobSeeker");
                 });
 
             modelBuilder.Entity("CareerLaunch.Models.JobPost", b =>
@@ -575,15 +547,8 @@ namespace CareerLaunch.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CareerLaunch.Models.JobPost", b =>
-                {
-                    b.Navigation("Applications");
-                });
-
             modelBuilder.Entity("CareerLaunch.Models.ViewModel.ApplicationUser", b =>
                 {
-                    b.Navigation("Applications");
-
                     b.Navigation("JobPosts");
                 });
 #pragma warning restore 612, 618

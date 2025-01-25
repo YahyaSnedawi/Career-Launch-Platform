@@ -1,0 +1,175 @@
+﻿@model CareerLaunch.Models.Application
+
+@{
+    ViewData["Title"] = "Application Details";
+}
+
+<div class="container mt-5">
+    <h1>@ViewData["Title"]</h1>
+
+    <!-- Candidate Section -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4>Applicant Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.FullName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.FullName)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.CoverLetter)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.CoverLetter)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.ResumePath)
+                </dt>
+                <dd class="col-sm-9">
+                    <a href="@Model.ResumePath" class="btn btn-outline-primary" target="_blank">View Resume</a>
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.ApplicationDate)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.ApplicationDate)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Job Section -->
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h4>Job Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Job.CompanyName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Job.CompanyName)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Job.Title)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Job.Title)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Job.Description)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Job.Description)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Job.Location)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Job.Location)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Job.JobType)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Job.JobType)
+                </dd>
+
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Job.Email)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Job.Email)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Action Links -->
+    <div class="mt-4">
+        
+        <a class="btn btn-secondary" asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        font-size: 1.25rem;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .card-body {
+        background-color: #f9f9f9;
+        padding: 20px;
+    }
+
+    dl.row dt {
+        font-weight: bold;
+        color: #555;
+    }
+
+    dl.row dd {
+        color: #333;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 8px 16px;
+        margin-right: 10px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+        background-color: #495057;
+        border-color: #495057;
+    }
+</style>

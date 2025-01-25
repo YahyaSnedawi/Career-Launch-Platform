@@ -10,8 +10,8 @@
             <div class="col-md-7">
                 <h1 class="text-white font-weight-bold">@Model.Title</h1>
                 <div class="custom-breadcrumbs">
-                    <a href="@Url.Action("Index", "Home")">Home</a> <span class="mx-2 slash">/</span>
-                    <a href="@Url.Action("Index", "Job")">Job</a> <span class="mx-2 slash">/</span>
+                    <a asp-action="Index" asp-controller="Home">Home</a> <span class="mx-2 slash">/</span>
+                    <a asp-action="Index" asp-controller="JobPosts">Job</a> <span class="mx-2 slash">/</span>
                     <span class="text-white"><strong>@Model.Title</strong></span>
                 </div>
             </div>
@@ -28,56 +28,23 @@
                     <h4 class="company-name text-primary mt-2">@Model.CompanyName</h4>
                     <p class="location mt-3"><strong>📍 Location:</strong> @Model.Location</p>
                     <p class="job-type"><strong>🕒 Job Type:</strong> @Model.JobType</p>
-                    <p class="post-date"><strong>📅 Posted On:</strong> @Model.PostDate.ToString("MMMM dd, yyyy")</p>
+                    <p class="post-date"><strong>📅 Posted On:</strong> @Model.PostDate</p>
 
                     <h2 class="font-weight-bold mt-5" style="font-size: 1.75rem;">Job Description</h2>
                     <p>@Model.Description</p>
 
-                    @if (TempData["Message"] != null)
-                    {
-                        var messageType = TempData["MessageType"]?.ToString();
-                        var message = TempData["Message"]?.ToString();
-                        <script>
-                            $(document).ready(function() {
-                                Swal.fire({
-                                    title: messageType === 'success' ? 'Success' : 'Error',
-                                    text: '@message',
-                                    icon: messageType === 'success' ? 'success' : 'error',
-                                    confirmButtonText: 'OK'
-                                });
-                            });
-                        </script>
-                    }
-
-                    <div class="mt-4">
-                        <form asp-action="ApplyForJob" asp-controller="Application" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="jobId" value="@Model.JobPostId" />
-
-                            <div class="form-group">
-                                <label for="coverLetter">Cover Letter</label>
-                                <textarea class="form-control" id="coverLetter" name="coverLetter" rows="4"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="resumeFile">Upload Your Resume</label>
-                                <input type="file" class="form-control" id="resumeFile" name="resumeFile" />
-                            </div>
-
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                Apply Now
-                            </button>
-                        </form>
-                    </div>
+                    <form method="get" asp-action="Application" asp-controller="JobPosts">
+                        <input type="hidden" name="JobPostId" value="@Model.JobPostId" />
+                        <button type="submit" class="btn btn-primary">Apply</button>
+                    </form>
                 </div>
             </div>
-
             <div class="col-lg-4 text-center">
                 <div class="company-logo">
-                    <img src="@Model.UploadedFilePath" alt="@Model.CompanyName Logo"
-                         class="img-fluid rounded job-details-logo"
-                         style="border-radius: 10px;">
+                    <img src="@Model.UploadedFilePath" alt="@Model.CompanyName Logo" class="img-fluid rounded job-details-logo" style="border-radius: 10px;">
                 </div>
             </div>
         </div>
     </div>
 </section>
+

@@ -1,0 +1,144 @@
+﻿@model IEnumerable<CareerLaunch.Models.Application>
+
+<div class="container mt-5">
+    <h3 class="fw-bold mb-3">Applicants Table</h3>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Company Name</th>
+                    <th>Resume</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var application in Model)
+                {
+                    <tr>
+                        <td>@application.ApplicationId</td>
+                        <td>@application.FullName</td>
+                        <td>@application.Job.CompanyName</td>
+                        <td><a href="@application.ResumePath" class="btn btn-outline-primary">View Resume</a></td>
+                        <td>
+                            <a href="@Url.Action("Details", "Applications", new { id = application.ApplicationId })" class="btn btn-info">
+                                Details
+                            </a>
+                           
+                            <button type="button" class="btn btn-danger" onclick="deleteApplication(@application.ApplicationId)">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+                </li>
+            }
+
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                </li>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+
+<style>
+    /* Container for margin spacing */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Card styling */
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    /* Card header styling */
+    .card-header {
+        border-radius: 10px 10px 0 0;
+    }
+
+    /* Table header */
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+        border-collapse: collapse;
+    }
+
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #ddd;
+    }
+
+    .table-bordered tr {
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Action button styling */
+    .btn-outline-primary {
+        border-radius: 20px;
+        font-size: 14px;
+    }
+
+    .btn-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .btn-link:hover {
+        color: #0056b3;
+    }
+
+    /* Button hover effect */
+    .btn-info:hover {
+        background-color: #17a2b8;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    /* Form button action container */
+    .form-button-action {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    /* Adding some spacing between elements */
+    .mt-5 {
+        margin-top: 3rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 2rem;
+    }
+</style>

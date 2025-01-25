@@ -1,0 +1,41 @@
+﻿@model CareerLaunch.Models.JobPost
+
+@{
+    ViewData["Title"] = "Job Details";
+}
+
+
+<section class="site-section" id="job-details-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="job-details">
+                    <h1 class="job-title font-weight-bold" style="font-size: 2rem;">@Model.Title</h1>
+                    <h4 class="company-name text-primary mt-2">@Model.CompanyName</h4>
+                    <p class="location mt-3"><strong>📍 Location:</strong> @Model.Location</p>
+                    <p class="job-type"><strong>🕒 Job Type:</strong> @Model.JobType</p>
+                    <p class="post-date"><strong>📅 Posted On:</strong> @Model.PostDate</p>
+
+                    <h2 class="font-weight-bold mt-5" style="font-size: 1.75rem;">Job Description</h2>
+                    <p>@Model.Description</p>
+
+                    <div class="mt-4">
+                        <form method="get" action="/JobPosts/Application">
+                            <input type="hidden" name="JobPostId" value="@Model.JobPostId" />
+                            <button type="submit" class="btn btn-primary">Apply</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 text-center">
+                <div class="company-logo">
+                    <img src="@Model.UploadedFilePath" alt="@Model.CompanyName Logo"
+                         class="img-fluid rounded job-details-logo"
+                         style="border-radius: 10px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

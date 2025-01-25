@@ -1,7 +1,10 @@
 ﻿using CareerLaunch.Models.ViewModel;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 
 namespace CareerLaunch.Controllers
@@ -47,7 +50,14 @@ namespace CareerLaunch.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, "JobSeeker");
                     }
+                    else
+                    {
+                       
+                            await _userManager.AddToRoleAsync(user, "Admin");
+                        
 
+                    }
+                   
                   
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
@@ -89,12 +99,20 @@ namespace CareerLaunch.Controllers
                 return View(model);
             }
 
-        
             var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-              
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Role, user.Role),
+            
+        };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                await _signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
             }
 
@@ -107,6 +125,9 @@ namespace CareerLaunch.Controllers
             ModelState.AddModelError("", "Invalid login attempt.");
             return View(model);
         }
+
+
+
 
         // POST: Logout
         [HttpPost]

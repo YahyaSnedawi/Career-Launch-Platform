@@ -21,7 +21,7 @@
 
 <section class="site-section">
     <div class="container">
-        <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="JobPosts">
+        <form class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="JobPosts" id="createJobForm">
             <div asp-validation-summary="All" class="text-danger"></div>
             <h3 class="text-black mb-5 border-bottom pb-2">Job Details</h3>
 
@@ -86,4 +86,9 @@
         const fileName = input.files[0]?.name || "No file chosen";
         document.getElementById('file-name').innerText = fileName;
     }
+</script>
+<script>
+    document.getElementById('createJobForm').addEventListener('submit', function (event) {
+        alert('Thank you for submitting your Job. Please await a response from our team.');
+    });
 </script>

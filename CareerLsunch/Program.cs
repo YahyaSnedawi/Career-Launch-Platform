@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CareerLaunch.Models.ViewModel;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace CareerLaunch
 {
@@ -11,6 +12,12 @@ namespace CareerLaunch
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";  
+        options.LogoutPath = "/Account/Logout"; 
+    });
 
             builder.Services.AddControllersWithViews();
                
@@ -26,10 +33,7 @@ namespace CareerLaunch
             builder.Services.AddScoped<UserManager<ApplicationUser>>();
             builder.Services.AddScoped<RoleManager<IdentityRole>>();
 
-            builder.Services.Configure<FormOptions>(options =>
-            {
-                options.MultipartBodyLengthLimit = 10 * 1024 * 1024; 
-            });
+           
 
             var app = builder.Build();
 
@@ -59,7 +63,7 @@ namespace CareerLaunch
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

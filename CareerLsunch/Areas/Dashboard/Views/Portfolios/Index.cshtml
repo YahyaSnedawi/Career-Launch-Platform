@@ -1,0 +1,243 @@
+﻿@model IEnumerable<CareerLaunch.Models.Portfolio>
+
+@{
+    ViewData["Title"] = "Portfolio Requests";
+}
+
+<style>
+    body {
+        background-color: #f4f6f9; 
+        font-family: 'Arial', sans-serif;
+    }
+
+    .card {
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        border-bottom: 2px solid #ddd;
+    }
+
+    .table {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+        .table th {
+            background-color: #1abc9c;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+    .btn {
+        border-radius: 20px;
+        font-size: 14px;
+        padding: 5px 15px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border: none;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border: none;
+    }
+
+    h4.card-title {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .page-header h3 {
+        font-weight: bold;
+        color: #1abc9c;
+    }
+
+    .breadcrumbs {
+        list-style: none;
+        padding: 0;
+    }
+
+        .breadcrumbs li {
+            display: inline;
+            font-size: 14px;
+        }
+
+            .breadcrumbs li a {
+                color: #1abc9c;
+                text-decoration: none;
+            }
+</style>
+
+<div class="container mt-4">
+    <div class="page-inner">
+        <div class="page-header">
+            <h3 class="fw-bold mb-3">Portfolio Table</h3>
+            <ul class="breadcrumbs mb-3">
+                <li class="nav-home">
+                    <a href="#">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Pending Portfolios Table -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        <h4 class="card-title">All Portfolios</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="add-row" class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.PendingPortfolios != null)
+                                    {
+                                        foreach (var portfolio in ViewBag.PendingPortfolios)
+                                        {
+                                            <tr>
+                                                <td>@portfolio.PortfolioId</td>
+                                                <td>@portfolio.FullName</td>
+                                                <td>@portfolio.ContactEmail</td>
+                                                <td>@portfolio.ContactPhone</td>
+                                                <td><span class="badge bg-warning text-dark">Pending</span></td>
+                                                <td>
+                                                    <a asp-action="Accept" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-success" onclick="return confirm('Are you sure you want to accept this Portfolio?');">Accept</a>
+                                                    <a asp-action="Reject" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-danger" onclick="return confirm('Are you sure you want to reject this Portfolio?');">Reject</a>
+                                                    <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-primary">Details</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accepted Portfolios Table -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="card-title">Accepted Portfolios</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.AcceptedPortfolios != null)
+                                    {
+                                        foreach (var portfolio in ViewBag.AcceptedPortfolios)
+                                        {
+                                            <tr>
+                                                <td>@portfolio.PortfolioId</td>
+                                                <td>@portfolio.FullName</td>
+                                                <td>@portfolio.ContactEmail</td>
+                                                <td>@portfolio.ContactPhone</td>
+                                                <td><span class="badge bg-success">Accepted</span></td>
+                                                <td>
+                                                    <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-primary">Details</a>
+                                                    <a asp-action="Pend" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-secondary">Pend</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rejected Portfolios Table -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h4 class="card-title">Rejected Portfolios</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (ViewBag.RejectedPortfolios != null)
+                                    {
+                                        foreach (var portfolio in ViewBag.RejectedPortfolios)
+                                        {
+                                            <tr>
+                                                <td>@portfolio.PortfolioId</td>
+                                                <td>@portfolio.FullName</td>
+                                                <td>@portfolio.ContactEmail</td>
+                                                <td>@portfolio.ContactPhone</td>
+                                                <td><span class="badge bg-danger">Rejected</span></td>
+                                                <td>
+                                                    <a asp-action="Details" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-primary">Details</a>
+                                                    <a asp-action="Pend" asp-controller="Portfolios" asp-route-id="@portfolio.PortfolioId" class="btn btn-secondary">Pend</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

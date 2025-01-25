@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="@Url.Content("~/Admin/assets/css/bootstrap.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Admin/assets/css/plugins.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Admin/assets/css/kaiadmin.min.css")" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 
 
 
@@ -39,371 +41,164 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
-        <div class="sidebar" data-background-color="dark">
+        <div class="sidebar" style="background-color: #2c3e50; color: #ecf0f1;">
             <div class="sidebar-logo">
                 <!-- Logo Header -->
-                <div class="logo-header" data-background-color="dark">
-                    <a asp-action="Index" asp-controller="Organizations" class="logo">
-                        <img src="@Url.Content("~/assets/images/backgrounds/LogoCast.jpg")"
-                             alt="navbar brand"
-                             class="navbar-brand"
-                             height="20" />
+                <div class="logo-header" style="background-color: #34495e; color: #ecf0f1; padding: 10px; border: none;">
+                    <a href="https://localhost:7118/" class="logo" style="text-decoration: none; color: #ecf0f1;">
+                        <div class="site-logo col-6" style="font-size: 20px; font-weight: bold; text-align: center;">
+                            CareerLaunch
+                        </div>
                     </a>
                     <div class="nav-toggle">
-                        <button class="btn btn-toggle toggle-sidebar">
+                        <button class="btn btn-toggle toggle-sidebar" style="color: #ecf0f1; background: none; border: none;">
                             <i class="gg-menu-right"></i>
                         </button>
-                        <button class="btn btn-toggle sidenav-toggler">
+                        <button class="btn btn-toggle sidenav-toggler" style="color: #ecf0f1; background: none; border: none;">
                             <i class="gg-menu-left"></i>
                         </button>
                     </div>
-                    <button class="topbar-toggler more">
+                    <button class="topbar-toggler more" style="color: #ecf0f1; background: none; border: none;">
                         <i class="gg-more-vertical-alt"></i>
                     </button>
-                </div>
+               
+
+        </div>
+
                 <!-- End Logo Header -->
             </div>
-            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+
+            <div class="sidebar-wrapper scrollbar scrollbar-inner" style="background-color: #2c3e50; color: #ecf0f1; height: 100vh; padding: 10px;">
                 <div class="sidebar-content">
-                    <ul class="nav nav-secondary">
-                        <li class="nav-item active">
-                            <a data-bs-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
-                                <i class="fas fa-home"></i>
-                                <p>Dashboard</p>
-                                <span class="caret"></span>
+                    <ul class="nav nav-secondary" style="list-style: none; padding: 0; margin: 0;">
+
+                        <!-- Dashboard Section -->
+                        <li class="nav-item active" style="margin-bottom: 15px;">
+                            <a href="#" class="d-flex align-items-center" style="text-decoration: none; color: #ecf0f1; font-size: 16px; font-weight: 600;">
+                                <i class="fas fa-home me-2" style="font-size: 20px; color: #1abc9c;"></i>
+                                <span style="margin-left: 5px;">Dashboard</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#tables">
-                                <i class="fas fa-table"></i>
-                                <p>Dashboard1</p>
-                                <span class="caret"></span>
+
+
+                        <!-- Blogs Section -->
+                        <li class="nav-section" style="margin-bottom: 10px;">
+                            <h4 class="text-section" style="font-size: 14px; font-weight: bold; color: #95a5a6; margin-bottom: 5px;">Blogs</h4>
+                        </li>
+                        <li class="nav-item" style="margin-bottom: 15px;">
+                            <a asp-action="Index" asp-controller="BlogPosts" class="d-flex align-items-center" style="text-decoration: none; color: #ecf0f1; font-size: 16px;">
+                                <i class="fas fa-table me-2" style="font-size: 18px; color: #1abc9c;"></i>
+                                <p>Blogs Table</p>
                             </a>
-
                         </li>
 
-                        <li class="nav-section">
-                            <span class="sidebar-mini-icon">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </span>
-                            <h4 class="text-section">Organizations</h4>
+                        <!-- Portfolios Section -->
+                        <li class="nav-section" style="margin-bottom: 10px;">
+                            <h4 class="text-section" style="font-size: 14px; font-weight: bold; color: #95a5a6; margin-bottom: 5px;">Portfolios</h4>
                         </li>
-
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#tables">
-                                <i class="fas fa-table"></i>
-                                <p>Organizations Table</p>
-                                <span class="caret"></span>
+                        <li class="nav-item" style="margin-bottom: 15px;">
+                            <a asp-action="Index" asp-controller="Portfolios" class="d-flex align-items-center" style="text-decoration: none; color: #ecf0f1; font-size: 16px;">
+                                <i class="fas fa-table me-2" style="font-size: 18px; color: #1abc9c;"></i>
+                                <p>Portfolio Table</p>
                             </a>
-                            <div class="collapse" id="tables">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a asp-action="Index" asp-controller="Organizations">
-                                            <span class="sub-item">Datatables</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
 
-                        <li class="nav-section">
-                            <span class="sidebar-mini-icon">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </span>
-                            <h4 class="text-section">Talents</h4>
+                        <!-- Public Users Section -->
+                        <li class="nav-section" style="margin-bottom: 10px;">
+                            <h4 class="text-section" style="font-size: 14px; font-weight: bold; color: #95a5a6; margin-bottom: 5px;">Jobs</h4>
                         </li>
-
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#tables">
-                                <i class="fas fa-table"></i>
-                                <p>Talents Table</p>
-                                <span class="caret"></span>
+                        <li class="nav-item" style="margin-bottom: 15px;">
+                            <a asp-action="Index" asp-controller="JobPosts" class="d-flex align-items-center" style="text-decoration: none; color: #ecf0f1; font-size: 16px;">
+                                <i class="fas fa-table me-2" style="font-size: 18px; color: #1abc9c;"></i>
+                                <p>Jobs Table</p>
                             </a>
-                            <div class="collapse" id="tables">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a asp-action="Index" asp-controller="Talents">
-                                            <span class="sub-item">Datatables</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
 
-                        <li class="nav-section">
-                            <span class="sidebar-mini-icon">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </span>
-                            <h4 class="text-section">Public Users</h4>
+                        <!-- Applications Section -->
+                        <li class="nav-section" style="margin-bottom: 10px;">
+                            <h4 class="text-section" style="font-size: 14px; font-weight: bold; color: #95a5a6; margin-bottom: 5px;">Applications</h4>
                         </li>
-
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#tables">
-                                <i class="fas fa-table"></i>
-                                <p>Events Table</p>
-                                <span class="caret"></span>
+                        <li class="nav-item" style="margin-bottom: 15px;">
+                            <a asp-action="Index" asp-controller="Applications" class="d-flex align-items-center" style="text-decoration: none; color: #ecf0f1; font-size: 16px;">
+                                <i class="fas fa-table me-2" style="font-size: 18px; color: #1abc9c;"></i>
+                                <p>Application Table</p>
                             </a>
-                            <div class="collapse" id="tables">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a asp-action="Index" asp-controller="Events">
-                                            <span class="sub-item">Datatables</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                        </li>
+
+                        <!-- Contact Us Section -->
+                        <li class="nav-section" style="margin-bottom: 10px;">
+                            <h4 class="text-section" style="font-size: 14px; font-weight: bold; color: #95a5a6; margin-bottom: 5px;">Contact Us</h4>
+                        </li>
+                        <li class="nav-item" style="margin-bottom: 15px;">
+                            <a asp-action="Index" asp-controller="Contacts" class="d-flex align-items-center" style="text-decoration: none; color: #ecf0f1; font-size: 16px;">
+                                <i class="fas fa-table me-2" style="font-size: 18px; color: #1abc9c;"></i>
+                                <p>Contact Table</p>
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
+
+
         </div>
     </div>
     <!-- End Sidebar -->
+
     <div class="main-panel">
         <div class="main-header">
-            <div class="main-header-logo">
-                <!-- Logo Header -->
-                <div class="logo-header" data-background-color="dark">
-                    <a asp-controller="Home" asp-action="Index" class="logo">
-                        <img src="~/Admin/assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand" height="20" />
-                    </a>
-                    <div class="nav-toggle">
-                        <button class="btn btn-toggle toggle-sidebar">
-                            <i class="gg-menu-right"></i>
-                        </button>
-                        <button class="btn btn-toggle sidenav-toggler">
-                            <i class="gg-menu-left"></i>
-                        </button>
-                    </div>
-                    <button class="topbar-toggler more">
-                        <i class="gg-more-vertical-alt"></i>
-                    </button>
-                </div>
-                <!-- End Logo Header -->
-            </div>
             <!-- Navbar Header -->
-            <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
-                <div class="container-fluid">
-                    <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button type="submit" class="btn btn-search pe-1">
-                                    <i class="fa fa-search search-icon"></i>
-                                </button>
-                            </div>
-                            <input type="text" placeholder="Search ..." class="form-control" />
-                        </div>
-                    </nav>
+            <nav class="navbar navbar-header navbar-expand-lg" style="background-color: #f8f9fa; border-bottom: 2px solid #1abc9c;">
+                <div class="container-fluid d-flex justify-content-between align-items-center">
+                    <!-- Logo (Text Only) -->
+                    <a href="https://localhost:7118/" class="logo d-flex align-items-center" style="text-decoration: none; color: #1abc9c;">
+                        <span style="font-size: 20px; font-weight: bold;">CareerLaunch</span>
+                    </a>
 
-                    <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                        <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true">
-                                <i class="fa fa-search"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-search animated fadeIn">
-                                <form class="navbar-left navbar-form nav-search">
-                                    <div class="input-group">
-                                        <input type="text" placeholder="Search ..." class="form-control" />
-                                    </div>
-                                </form>
-                            </ul>
-                        </li>
-                        <li class="nav-item topbar-icon dropdown hidden-caret">
-                            <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-envelope"></i>
-                            </a>
-                            <ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown">
-                                <li>
-                                    <div class="dropdown-title d-flex justify-content-between align-items-center">
-                                        Messages
-                                        <a href="#" class="small">Mark all as read</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="message-notif-scroll scrollbar-outer">
-                                        <div class="notif-center">
-                                            <a href="#">
-                                                <div class="notif-img">
-                                                    <img src="~/Admin/assets/img/jm_denis.jpg" alt="Img Profile" />
-                                                </div>
-                                                <div class="notif-content">
-                                                    <span class="subject">Jimmy Denis</span>
-                                                    <span class="block"> How are you ? </span>
-                                                    <span class="time">5 minutes ago</span>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div class="notif-img">
-                                                    <img src="~/Admin/assets/img/chadengle.jpg" alt="Img Profile" />
-                                                </div>
-                                                <div class="notif-content">
-                                                    <span class="subject">Chad</span>
-                                                    <span class="block"> Ok, Thanks ! </span>
-                                                    <span class="time">12 minutes ago</span>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div class="notif-img">
-                                                    <img src="~/Admin/assets/img/mlane.jpg" alt="Img Profile" />
-                                                </div>
-                                                <div class="notif-content">
-                                                    <span class="subject">Jhon Doe</span>
-                                                    <span class="block"> Ready for the meeting today...</span>
-                                                    <span class="time">12 minutes ago</span>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div class="notif-img">
-                                                    <img src="~/Admin/assets/img/talha.jpg" alt="Img Profile" />
-                                                </div>
-                                                <div class="notif-content">
-                                                    <span class="subject">Talha</span>
-                                                    <span class="block"> Hi, Apa Kabar ? </span>
-                                                    <span class="time">17 minutes ago</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="see-all" href="javascript:void(0);">
-                                        See all messages<i class="fa fa-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item topbar-icon dropdown hidden-caret">
-                            <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="notification">4</span>
-                            </a>
-                            <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
-                                <li>
-                                    <div class="dropdown-title">You have 4 new notification</div>
-                                </li>
-                                <li>
-                                    <div class="notif-scroll scrollbar-outer">
-                                        <div class="notif-center">
-                                            <a href="#">
-                                                <div class="notif-icon notif-primary">
-                                                    <i class="fa fa-user-plus"></i>
-                                                </div>
-                                                <div class="notif-content">
-                                                    <span class="block"> New user registered </span>
-                                                    <span class="time">5 minutes ago</span>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div class="notif-icon notif-success">
-                                                    <i class="fa fa-comment"></i>
-                                                </div>
-                                                <div class="notif-content">
-                                                    <span class="block"> Rahmad commented on Admin </span>
-                                                    <span class="time">12 minutes ago</span>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div class="notif-img">
-                                                    <img src="~/Admin/assets/img/profile2.jpg" alt="Img Profile" />
-                                                </div>
-                                                <div class="notif-content">
-                                                    <span class="block"> Reza send messages to you </span>
-                                                    <span class="time">12 minutes ago</span>
-                                                </div>
-                                            </a>
-                                            <a href="#">
-                                                <div class="notif-icon notif-danger">
-                                                    <i class="fa fa-heart"></i>
-                                                </div>
-                                                <div class="notif-content">
-                                                    <span class="block"> Farrah liked Admin </span>
-                                                    <span class="time">17 minutes ago</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a class="see-all" href="javascript:void(0);">
-                                        See all notifications<i class="fa fa-angle-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item topbar-user dropdown hidden-caret">
-                            <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                                <div class="avatar-sm">
-                                    <img src="~/Admin/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
-                                </div>
-                                <span class="profile-username">
-                                    <span class="op-7">Hi,</span>
-                                    <span class="fw-bold">Hizrian</span>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-user animated fadeIn">
-                                <div class="dropdown-user-scroll scrollbar-outer">
-                                <li>
-                                    <div class="user-box">
-                                        <div class="avatar-lg">
-                                            <img src="~/Admin/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded" />
-                                        </div>
-                                        <div class="u-text">
-                                            <h4>Hizrian</h4>
-                                            <p class="text-muted">hello@example.com</p>
-                                            <a asp-controller="Profile" asp-action="Index" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
-                                        </div>
-                                    </div>
+                    <!-- Centered Name and Icon -->
+                    <div class="d-flex align-items-center">
+                        <i class="fa fa-user" style="font-size: 24px; color: #1abc9c; margin-right: 10px;"></i>
+                        <span style="font-size: 18px; font-weight: 600; color: #333;">Yahya Snedawi</span>
+                    </div>
 
-
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">My Profile</a>
-                                    <a class="dropdown-item" href="#">My Balance</a>
-                                    <a class="dropdown-item" href="#">Inbox</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Account Setting</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Logout</a>
-                                </li>
-                        </li>
-                    </ul>
-
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown">
+                        <a class="btn btn-link dropdown-toggle" href="#" id="socialMediaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color: #333; font-size: 16px;">
+                            My Social Media <i class="fa fa-caret-down" style="margin-left: 5px;"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="socialMediaDropdown" style="min-width: 200px; border-radius: 8px;">
+                            <li class="dropdown-item">
+                                <a href="https://www.instagram.com/ya7ya.sn/" target="_blank" class="d-flex align-items-center" style="text-decoration: none; color: #333;">
+                                    <i class="fa fa-instagram" style="color: #e4405f; font-size: 18px; margin-right: 10px;"></i>
+                                    Instagram
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="https://www.linkedin.com/in/yahya-snedawi-37923923b/" target="_blank" class="d-flex align-items-center" style="text-decoration: none; color: #333;">
+                                    <i class="fa fa-linkedin" style="color: #0077b5; font-size: 18px; margin-right: 10px;"></i>
+                                    LinkedIn
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a href="https://x.com/YSnedawi" target="_blank" class="d-flex align-items-center" style="text-decoration: none; color: #333;">
+                                    <i class="fa fa-twitter" style="color: #1da1f2; font-size: 18px; margin-right: 10px;"></i>
+                                    Twitter
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
+            </nav>
         </div>
 
+        <br /><br /><br /><br />
         <div>
             @RenderBody()
         </div>
     </div>
-    <div>
-        <footer class="footer">
-            <div class="container-fluid d-flex justify-content-between">
-                <nav class="pull-left" aria-label="Footer Navigation">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://www.themekita.com" aria-label="Visit ThemeKita">ThemeKita</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" aria-label="Get Help">Help</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" aria-label="View Licenses">Licenses</a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="copyright">
-                    &copy; 2024, made with <i class="fa fa-heart heart text-danger"></i> by
-                    <a href="http://www.themekita.com">ThemeKita</a>
-                </div>
-                <div>
-                    Distributed by
-                    <a target="_blank" href="https://themewagon.com/" aria-label="Visit ThemeWagon">ThemeWagon</a>.
-                </div>
-            </div>
-        </footer>
-    </div>
+
+
+
+   
 
 
 
@@ -439,6 +234,10 @@
 
     <!-- Kaiadmin JS -->
     <script src="~/Admin/assets/js/kaiadmin.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 
 
     <script>

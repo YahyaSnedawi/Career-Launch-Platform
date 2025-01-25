@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Application";
+}
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url('@Url.Content("~/images/hero_1.jpg")');" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Apply Now</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Apply Now</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container mt-5">
+    <h2 class="text-center">Application Form</h2>
+
+    
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form method="post" enctype="multipart/form-data" action="@Url.Action("SubmitApplication", "JobPosts")" id="submitApplicationForm" style="border: 2px solid #000000; border-radius: 10px; padding: 20px; margin-bottom: 50px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+        <div class="form-group">
+            <label for="FullName">Full Name</label>
+            <input type="text" class="form-control" id="FullName" name="FullName" required />
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="text" class="form-control" id="Email" name="Email" required />
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number</label>
+            <input type="number" class="form-control" id="PhoneNumber" name="PhoneNumber" required />
+        </div>
+        <div class="form-group">
+            <label for="CoverLetter">Cover Letter</label>
+            <textarea class="form-control" id="CoverLetter" name="CoverLetter" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="ResumeFile">Upload Resume</label>
+            <input type="file" class="form-control-file" id="ResumeFile" name="ResumeFile" />
+        </div>
+
+        <input type="hidden" name="JobPostId" value="@Model.JobPostId" />
+
+        <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+    </form>
+
+    <script>
+        document.getElementById('submitApplicationForm').addEventListener('submit', function (event) {
+            alert('Thank you for submitting your Apply. Please await a response from our team.');
+        });
+    </script>

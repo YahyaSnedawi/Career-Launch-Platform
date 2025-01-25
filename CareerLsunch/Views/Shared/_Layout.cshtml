@@ -67,6 +67,15 @@
 
                     <div class="right-cta-menu text-right d-flex align-items-center col-6">
                         <div class="ml-auto">
+                             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+
+                            {
+                              
+                                <a asp-area="Dashboard" asp-action="Index" asp-controller="JobPosts" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block">
+                                    <span class="mr-2 icon-add"></span>Dashboard
+                                </a>
+                                
+                            }
                             
                             @if (User.Identity.IsAuthenticated && User.IsInRole("Employer"))
 
@@ -75,12 +84,16 @@
                                 <a asp-action="Create" asp-controller="JobPosts" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block">
                                     <span class="mr-2 icon-add"></span>Post a Job
                                 </a>
+                                
                             }
 
                           
                             @if (User.Identity.IsAuthenticated && User.IsInRole("JobSeeker"))
 
                             {
+                                 <a asp-action="Create" asp-controller="Portfolios" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block">
+                                    <span class="mr-2 icon-add"></span>Create Portfolio
+                                </a>
                                 
                                 
                             }

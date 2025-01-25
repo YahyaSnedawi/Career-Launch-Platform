@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CareerLaunch.Data;
 using CareerLaunch.Models;
+using CareerLaunch.Migrations;
+using BlogPost = CareerLaunch.Models.BlogPost;
 
 namespace CareerLaunch.Controllers
 {
@@ -20,23 +22,32 @@ namespace CareerLaunch.Controllers
         }
 
         // GET: BlogPosts
-        public IActionResult Index(int page = 1, int pageSize = 9)
+        public IActionResult Index(int page = 1, int pageSize = 6)
         {
+            
+            var totalPosts = _context.Blogs
+                .Where(o => o.Status == BlogPostStatus.Accepted)
+                .Count();
+
+            
+            var totalPages = (int)Math.Ceiling((double)totalPosts / pageSize);
+
+           
             var blogPosts = _context.Blogs
-                .OrderByDescending(b => b.PublishedDate)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
+                .Where(o => o.Status == BlogPostStatus.Accepted)
+                .Skip((page - 1) * pageSize) 
+                .Take(pageSize) 
                 .ToList();
 
-            var totalPosts = _context.Blogs.Count();
             ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = (int)Math.Ceiling((double)totalPosts / pageSize);
+            ViewBag.TotalPages = totalPages;
 
             return View(blogPosts);
         }
 
-            // GET: BlogPosts/Details/5
-            public IActionResult Details(int id)
+
+        // GET: BlogPosts/Details/5
+        public IActionResult Details(int id)
         {
             if (id <= 0)
             {
@@ -60,8 +71,16 @@ namespace CareerLaunch.Controllers
         public IActionResult Create()
         {
             var blogPost = new BlogPost();
-            return View();
+
+            if (!User.Identity.IsAuthenticated)
+            {
+
+                TempData["LoginRequired"] = "You need to log in to join us.";
+                return RedirectToAction("Login", "Account");
+            }
+            return View(blogPost);
         }
+          
 
         // POST: BlogPosts/Create
         [HttpPost]

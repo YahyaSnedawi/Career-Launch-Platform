@@ -28,6 +28,7 @@ namespace CareerLaunch.Models
         [Phone(ErrorMessage = "Invalid phone number format.")]
         public string ContactPhone { get; set; }
         public string WorkType { get; set; } // Freelancer أو Worker
+        public PortfolioStatus Status { get; set; }
 
         [NotMapped]
         public IFormFile ProfilePictureFile { get; set; }
@@ -35,6 +36,12 @@ namespace CareerLaunch.Models
         public IFormFile ResumeFile { get; set; }
         
     
+    }
+    public enum PortfolioStatus
+    {
+        Pending,
+        Accepted,
+        Rejected
     }
 
 }

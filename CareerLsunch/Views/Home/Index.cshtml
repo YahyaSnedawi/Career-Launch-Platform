@@ -7,67 +7,105 @@
 <section class="home-section section-hero overlay bg-image"
          style="background-image: url('@Url.Content("~/images/hero_1.jpg")');"
          id="home-section">
-
-   
-
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-12">
-                <div class="mb-5 text-center">
-                    <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
-                    
+               
+                
+                 @if (User.Identity.IsAuthenticated && User.IsInRole("Employer"))
+                {
+                    <div class="mb-5 text-center">
+                        <h1 class="text-white font-weight-bold">Effortlessly Connect with the Best Talent for Your Open Roles</h1>
+                    </div>
+
+                    <div class="additional-data text-center">
+                        <p class="text-white font-weight-light mb-4" style="font-size: 1.2rem;">
+                            Post your job with us, and we'll find the perfect candidate for you!
+                        </p>
+                    </div>
+                }
+                @if (User.Identity.IsAuthenticated && User.IsInRole("JobSeeker"))
+                {
+                    <div class="mb-5 text-center">
+                        <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
+                    </div>
+                    <div class="additional-data text-center">
+                        <p class="text-white font-weight-light mb-4" style="font-size: 1.2rem;">
+                            Create your portfolio with us, and we'll connect you with the perfect job opportunity!
+                        </p>
+                    </div>
+                }
+ 
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <div class="mb-5 text-center">
+                        <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
+                    </div>
+
+                    <div class="additional-data text-center">
+                        <p class="text-white font-weight-light mb-4" style="font-size: 1.2rem;">
+                            Find the perfect job that matches your skills and ambitions. Start your journey now!
+                        </p>
+                    </div>
+                }
+
+                <div class="text-center">
+                    <a asp-action="Contact" asp-controller="Home" class="btn btn-primary btn-lg text-white px-5 py-3" style="border-radius: 50px; font-size: 1rem;">
+                        Learn More
+                    </a>
                 </div>
-                <form method="post" class="search-jobs-form">
-                    <div class="row mb-5">
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <input type="text" class="form-control form-control-lg" placeholder="Job title, Company...">
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select Region">
-                                <option>Anywhere</option>
-                                <option>San Francisco</option>
-                                <option>Palo Alto</option>
-                                <option>New York</option>
-                                <option>Manhattan</option>
-                                <option>Ontario</option>
-                                <option>Toronto</option>
-                                <option>Kansas</option>
-                                <option>Mountain View</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <select class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Select Job Type">
-                                <option>Part Time</option>
-                                <option>Full Time</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span class="icon-search icon mr-2"></span>Search Job</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 popular-keywords">
-                            <h3>Trending Keywords:</h3>
-                            <ul class="keywords list-unstyled m-0 p-0">
-                                <li><a href="#" class="">UI Designer</a></li>
-                                <li><a href="#" class="">Python</a></li>
-                                <li><a href="#" class="">Developer</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
 
+   
     <a href="#next" class="scroll-button smoothscroll">
-        <span class=" icon-keyboard_arrow_down"></span>
+        <span class="icon-keyboard_arrow_down"></span>
     </a>
-
 </section>
 
-<section class="py-5 bg-image overlay-primary fixed overlay" id="next"
-         style="background-image: url('@Url.Content("~/images/hero_1.jpg")');">
+
+<section class="py-5 bg-image overlay-primary fixed overlay" id="next" style="background-image: url('@Url.Content("~/images/hero_1.jpg")');">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="section-title mb-2 text-white">CareerLaunch Site Stats</h2>
+                
+            </div>
+        </div>
+        <div class="row pb-0 block__19738 section-counter">
+
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="@ViewBag.BlogPosts">0</strong>
+                </div>
+                <span class="caption">Blogs</span>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="@ViewBag.Applications">0</strong>
+                </div>
+                <span class="caption">Candidates</span>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="@ViewBag.JobPosts">0</strong>
+                </div>
+                <span class="caption">Jobs Posted</span>
+            </div>
+
+            <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                <div class="d-flex align-items-center justify-content-center mb-2">
+                    <strong class="number" data-number="@ViewBag.Portfolios">0</strong>
+                </div>
+                <span class="caption">Portfolios</span>
+            </div>
+
+
+        </div>
+    </div>
 </section>
 
 
